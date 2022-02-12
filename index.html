@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    <main>
+
+        <section id="section"
+            class="drop-shadow-xl  mt-16 pb-5 mx-auto w-1/6 grid grid-cols-4 bg-black p-0 rounded  h-96 ">
+            <p id="display"
+                class=" text-right text-white col-span-4 p-2  w-100 bg-slate-900 break-words rounded h-28  text-3xl bold"
+                type="text"></p>
+            <h4 class="visible">
+                AC
+            </h4>
+            <h4 class="visible">C
+            </h4>
+            <h4 class=" visible">√
+            </h4>
+            <h4 class="visible border-l">/
+            </h4>
+            <h4 class="visible">7
+            </h4>
+            <h4 class="visible">8
+            </h4>
+            <h4 class="visible">9</h4>
+            <h4 class="visible border-l">*</h4>
+            <h4 class="visible">4</h4>
+            <h4 class="visible">5</h4>
+            <h4 class="visible">6</h4>
+            <h4 class="visible border-l">-</h4>
+            <h4 class="visible">1</h4>
+            <h4 class="visible">2</h4>
+            <h4 class="visible">3</h4>
+            <h4 class="visible border-l">+</h4>
+            <h4 class="visible">0</h4>
+            <h4 class="visible">.</h4>
+            <h4 class=" visible bg-blue-600 mt-1 rounded mr-2 col-span-2">
+                =</h4>
+        </section>
+    </main>
+
+    <script>
+        const buttons = document.getElementsByClassName('visible');
+
+        for (const button of buttons) {
+
+            button.setAttribute('style', 'font-size:20px; font-weight:400; color:white;  text-align:center; background-color:slate; cursor: pointer; ')
+
+            button.addEventListener('click', function () {
+                const value = button.innerText;
+                const display = document.getElementById('display');
+                if (value == 'AC') {
+                    display.innerText = '';
+                }
+                else if (value == 'C') {
+                    display.innerText = display.innerText.slice(0, -1);
+                }
+                else if (value == '=') {
+
+                    if (display.innerText == '') {
+                        display.innerText = '';
+                    }
+                    else {
+                        display.innerText = eval(display.innerText);
+                    }
+                }
+                else if (value == '√') {
+                    if (display.innerText > 0 && typeof display.innerText != 'number') {
+
+                        display.innerText = parseFloat(Math.sqrt(display.innerText).toFixed(3));
+
+                    }
+                    else {
+
+                        display.innerText = "Error!"
+                        display.style.color = "red"
+                    }
+                }
+                else {
+                    display.innerText = display.innerText + button.innerText;
+                }
+            })
+        }
+    </script>
+</body>
+
+</html>
